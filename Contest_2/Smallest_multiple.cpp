@@ -31,7 +31,7 @@ vector<int> primeFactors(int n) {
 
     for(int i=3; i<=sqrt(n); i+=2) {
         while(n%i ==0 ) {
-            arr.push_back(n/i);
+            arr.push_back(i);
             n /= i;
         }
     }
@@ -56,7 +56,6 @@ void solve(long long int n) {
         if(i == 1) {
             track.push_back(1);
             freq[0]++;
-            // cout << "z";
         } else {
             vector<int> facts = primeFactors(i);
             sort(facts.begin(), facts.end());
@@ -64,27 +63,21 @@ void solve(long long int n) {
                 track.push_back(facts[0]);
                 int index = search(primes, i);
                 freq[index]++;
-                // cout << "a";
             } else {
                 int c=1, k=0;
                 for(int j=0; j<facts.size()-1; j++) {
                     if(facts[j] == facts[j+1]) {
                         c++;
-                        // map(facts[j], freq[search(primes, facts[j])]++, primes, freq);
-                        // cout << "b";
                     } else {
-                        // if(freq[search(primes, facts[j])] > c) {
-                        // }
                         if(c > freq[search(primes, facts[j])]) {
                             map(facts[j], c, primes, freq);
                             track.push_back(facts[j]);
                         }
                         c=1;
-                        // cout << "c";
                     }
                     k=facts[j+1];
                 }
-                if(search(track, k) != -1) {
+                if(c > freq[search(primes, k)]) {
                     track.push_back(k);
                 }
             }
