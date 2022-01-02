@@ -9,6 +9,9 @@ int myFunction(int n) {
 }
 
 int main() {
-  cout << myFunction(3);
+  int n;
+  cout << "enter the index: ";
+  cin >> n;
+  cout << myFunction(n-1);
   return 0;
 }
